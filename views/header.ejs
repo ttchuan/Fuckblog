@@ -11,7 +11,18 @@
 	</header>
 	<nav>
 		<span><a title="主页" href="/">Home</a></span>
+		<% if(user) { %>
+		<span><a title="发表" href="/postArticle">Publish</a></span>
+		<span><a title="注销" href="/logout">logout</a></span>
+		<% } else { %>
 		<span><a title="登录" href="/login">Login</a></span>
 		<span><a title="注销" href="/reg">Register</a></span>
+		<% } %>
 	</nav>
 	<article>
+		<% if (success) { %>
+		<div><%= success %></div>
+		<% } %>
+		<% if (error) { %>
+		<div><%= error %></div>
+		<% } %>
