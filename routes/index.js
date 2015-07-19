@@ -17,6 +17,7 @@ module.exports = function (app) {
 			error:req.flash('error').toString()
 		});
 	});
+	app.get('/login',checkNotLogin);
 	app.get('/login',function (req,res) {
 		res.render('login',{
 			title: '登录',
@@ -25,6 +26,7 @@ module.exports = function (app) {
 			error:req.flash('error').toString()
 		})
 	});
+	app.post('/login',checkNotLogin);
 	app.post('/login',function (req,res) {
 		var md5 = crypto.createHash('md5'),
 			password = md5.update(req.body.password).digest('hex');
@@ -44,11 +46,19 @@ module.exports = function (app) {
 			res.redirect('/index');
 		});
 	});
+	app.get('/postArticle',checkLogin);
 	app.get('/postArticle',function (req,res) {
-		res.render('post',{title: '发表文章'})
+		res.render('post',{
+			title: '发表文章',
+			user: req.session.user,
+			success:req.flash('success').toString(),
+			error:req.flash('error').toString()
+		})
 	});
+	app.post('/postArticle',checkLogin);
 	app.post('/postArticle',function (req,res) {
 	});
+	app.get('/reg',checkNotLogin);
 	app.get('/reg',function (req,res) {
 		res.render('reg',{
 			title: '注册',
@@ -57,6 +67,7 @@ module.exports = function (app) {
 			error:req.flash('error').toString()
 		})
 	});
+	app.post('/reg',checkNotLogin);
 	app.post('/reg',function (req,res) {
 		var name = req.body.name,
 			password = req.body.password,
@@ -96,10 +107,29 @@ module.exports = function (app) {
 			});
 		});
 	});
+	app.get('/logout',checkLogin);
 	app.get('/logout',function (req,res) {
 		req.session.user = null;
 		req.flash('success','注销成功');
 		console.log('注销成功');
 		res.redirect('/index');
 	});
+
+	function checkLogin (req,res,next) {
+		if (!req.session.user) {
+			req.flash('success','未登录');
+			console.log('注销成功');
+			res.redirect('/login');
+		};
+		next();
+	};
+
+	function checkNotLogin (req,res,next) {
+		if (req.session.user) {
+			req.flash('success','已登录');
+			console.log('已登录');
+			res.redirect('back');
+		};
+		next();
+	};
 };
