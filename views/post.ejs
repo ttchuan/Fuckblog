@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p><%= title %></p>
-  </body>
-</html>
+<%- include header %>
+<form method="post">
+	<div><span>标题：</span><input type="text" name="title"></div>
+	<div>正文：</div>
+	<textarea name="post" rows="20" cols="100"></textarea>
+	<input type="submit" value="发表">
+</form>
+<%- include footer %>
