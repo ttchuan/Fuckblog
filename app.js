@@ -14,6 +14,7 @@ var http = require('http');
 var server = http.createServer(app);
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var multer = require("multer");
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,6 +35,12 @@ app.use(session({
     host:settings.host,
     port:settings.port
   })
+}));
+app.use(multer({
+  dest:'./public/images',
+  rename: function (fieldname,filename) {
+    return filename;
+  }
 }));
 routes(app);
 server.listen(port);
