@@ -1,0 +1,11 @@
+<%- include header %>
+<p class="info">
+	<p>作者：<a href="/u/<%= post.name %>"><%= post.name %></a></p>
+</p>
+<p>
+	<%- post.post %>
+</p>
+<p class="info">
+	<p>日期：<%= post.time.minute %></p>
+</p>
+<%- include footer %>
