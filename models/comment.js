@@ -11,6 +11,7 @@ Comment.prototype.save = function(callback) {
 		day = this.day,
 		title = this.title,
 		comment = this.comment;
+	console.log(title);
 	mongod.open(function (err,db) {
 		if (err) {
 			return callback(err);
@@ -25,9 +26,9 @@ Comment.prototype.save = function(callback) {
 				"time.day":day,
 				"title":title
 			},{
-				// $push:{"comments":comment}
-				$set:{post:"ddddddddd"}
+				$push:{"comments":comment}
 			},function (err) {
+				console.log(1);
 				mongod.close();
 				if (err) {
 					return callback(err);
