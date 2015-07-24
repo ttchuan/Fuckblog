@@ -263,6 +263,21 @@ module.exports = function (app) {
 			res.redirect('/');
 		});
 	});
+	app.get('/archive',function (req,res) {
+		Post.getArchive(function (err,post) {
+			if (err) {
+				req.flash('error',err);
+				return res.redirect('/');
+			};
+			res.render('archive',{
+				title: "存档",
+				posts:posts,
+				user: req.session.user,
+				success:req.flash('success').toString(),
+				error:req.flash('error').toString()
+			});
+		});
+	});
 	function checkLogin (req,res,next) {
 		if (!req.session.user) {
 			req.flash('success','未登录');
