@@ -122,3 +122,8 @@ input[type="submit"]{
 	color: #000;
 	-webkit-transition:color .2s linear;
 }
+.search{
+	text-align: center;
+	font-size: 1em;
+	margin: 0.5em;
+}
