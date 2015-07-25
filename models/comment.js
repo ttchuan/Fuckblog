@@ -1,4 +1,5 @@
-var mongod = require('./db');
+var mongod = require('mongodb').Db;
+var settings = require('../settings');
 function Comment (name,day,title,comment) {
 	this.name = name;
 	this.day = day;

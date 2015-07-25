@@ -8,6 +8,8 @@ var routes = require('./routes/index');
 var settings = require('./settings');
 var flash = require('connect-flash');
 var app = express();
+var passport = require('passport'),
+    GithubStrategy = require('passport-github').Strategy;
 var port = normalizePort(process.env.PORT || '3000');
 var debug = require('debug')('blog:server');
 var http = require('http');
@@ -24,23 +26,36 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(session({
+//   secret:settings.cookieSecret,
+//   key:settings.db,
+//   cookie:{maxAge: 1000*60*60*24*30},
+//   resave:true,
+//   saveUninitialized:true,
+//   store:new MongoStore({
+//     db:settings.db,
+//     host:settings.host,
+//     port:settings.port
+//   })
+// }));
 app.use(session({
   secret:settings.cookieSecret,
-  key:settings.db,
   cookie:{maxAge: 1000*60*60*24*30},
-  resave:true,
-  saveUninitialized:true,
-  store:new MongoStore({
-    db:settings.db,
-    host:settings.host,
-    port:settings.port
-  })
+  url:settings.url
 }));
 app.use(multer({
   dest:'./public/images',
   rename: function (fieldname,filename) {
     return filename;
   }
+}));
+app.use(passport.initialize());
+passport.use(new GithubStrategy({
+  clientID:"770a73880c820a54ad96",
+  clientSecret:"55496262b57652d545e25897bdf0bf52d524893c",
+  callbackURL:"http://localhost:3000/login/github/callback"
+},function (accessToken,refreshToken,profile,done) {
+  done(null,profile);
 }));
 routes(app);
 server.listen(port);

@@ -1,7 +1,8 @@
 var crypto = require('crypto'),
 	User = require('../models/user'),
 	Post = require('../models/post'),
-	Comment = require('../models/comment');
+	Comment = require('../models/comment'),
+	passport = require('passport');
 module.exports = function (app) {
 	app.get('/',function (req,res) {
 		var page = req.query.p?parseInt(req.query.p):1;
@@ -47,6 +48,18 @@ module.exports = function (app) {
 			success:req.flash('success').toString(),
 			error:req.flash('error').toString()
 		})
+	});
+	app.get("/login/github",passport.authenticate('github',{session:false}));
+	app.get('/login/github/callback',passport.authenticate('github',{
+		session:false,
+		failurlRedirect:'/login',
+		successFlash:'登录成功！'
+	}),function (req,res) {
+		req.session.user = {
+			name:req.user.username,
+			head:"http://cdn.v2ex.com/gravatar/"+req.user._json.gravatar_id+"?s=48"
+		};
+		res.redirect('/');
 	});
 	app.post('/login',checkNotLogin);
 	app.post('/login',function (req,res) {
