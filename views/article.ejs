@@ -14,7 +14,7 @@
 	<p>日期：<%= post.time.minute %></p>
 	<p>
 		标签：
-		<% post.tags.forEach(function (tags,index){ %>
+		<% post.tags.forEach(function (tag,index){ %>
 		<% if(tag){%>
 		<a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
 		<% } %>
