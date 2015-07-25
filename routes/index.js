@@ -161,6 +161,17 @@ module.exports = function (app) {
 		req.flash('success','文件上传成功！');
 		res.redirect('/upload');
 	});
+	app.get('/links',function (req,res) {
+		Post.search(req.query.keyword,function (err,posts) {
+			res.render('links',{
+				title: "友情链接",
+				posts:posts,
+				user: req.session.user,
+				success:req.flash('success').toString(),
+				error:req.flash('error').toString()
+			});
+		});
+	});
 	app.get('/search',function (req,res) {
 		Post.search(req.query.keyword,function (err,posts) {
 			if (err) {
