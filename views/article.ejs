@@ -1,4 +1,5 @@
 <%- include header %>
+<div id="arcticle">
 <p>
 	<% if(user && (user.name == post.name)) { %>
 	<span>
@@ -30,5 +31,8 @@
 <p class="info">
 	<p>日期：<%= post.time.minute %></p>
 </p>
+</div>
+<div id="comment">
 <%- include comment %>
+</div>
 <%- include footer %>

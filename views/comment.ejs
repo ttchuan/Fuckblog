@@ -1,12 +1,14 @@
-<div>
 <% post.comments.forEach(function (comment,index){ %>
-<p>
-	<a href="<%= comment.website %>"><%= comment.name %></a>
-	<span class="info">回复于 <%= comment.time %></span>
-</p>
-<p>
-	<%- comment.content %>
-</p>
+<div class="comments">
+	<p class="comments_head">
+		<img src="<%= comment.head %>" class="l_head" />
+		<a href="<%= comment.website %>"><%= comment.name %></a>
+		<span class="info">回复于 <%= comment.time %></span>
+	</p>
+	<p class="comments_content">
+		<%- comment.content %>
+	</p>
+</div>
 <% }) %>
 <form method="post">
 	<% if(user) { %>
@@ -21,4 +23,3 @@
 	<textarea name="content" rows="5" cols="80"></textarea>
 	<input type="submit" value="留言">
 </form>
-</div>
