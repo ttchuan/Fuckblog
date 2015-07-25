@@ -25,6 +25,9 @@
 	<%- post.post %>
 </p>
 <p class="info">
+	阅读：<%= post.pv %> | 评论：<%= post.comments.length %>
+</p>
+<p class="info">
 	<p>日期：<%= post.time.minute %></p>
 </p>
 <%- include comment %>
