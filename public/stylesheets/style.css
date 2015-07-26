@@ -137,3 +137,12 @@ input[type="submit"]{
 	margin-top: -2.5em;
 	box-shadow: 0px 1px 4px #888;
 }
+article blockquote{
+	border-left:none;
+}
+blockquote .h3{
+	margin-top: 10px;
+}
+blockquote .h3+p{
+	text-indent: 2em;
+}

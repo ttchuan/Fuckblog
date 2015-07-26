@@ -1,11 +1,47 @@
 <%- include header %>
 <% posts.forEach(function (post,index){ %>
-<blokquote class="article">
-	<p class="article_head"><h2><a href="/u/<%= post.name %>/<%= post.time.day %>/<%= post.title %>"><%= post.title %></a></h2><a href="/u/<%= post.name %>"><img src="<%= post.head %>" class="r_head" /></a></p>
-	<p class="article_content"><%- post.post %></p>
-	<p class="info">阅读：<%= post.pv %> | 评论：<%= post.comments.length %></p>
-	<p class="info"><p>作者：<a href="/u/<%= post.name %>"><%= post.name %></a></p><p>日期：<%= post.time.minute %></p><p>标签：<% post.tags.forEach(function (tag,index){ %><% if(tag){%><a class="tag" href="/tags/<%= tag %>"><%= tag %></a><% } %><% }) %></p></p>
-</blokquote>
+<div class="article">
+	<div class="a_content">
+		<blockquote>
+			<p class="h3">
+				<a href="/u/<%= post.name %>/<%= post.time.day %>/<%= post.title %>"><%= post.title %></a>
+			</p>
+			<%- post.post %>
+			<small>
+				作者：
+				<cite title="<%= post.name %>">
+					<a href="/u/<%= post.name %>"><%= post.name %></a>
+				</cite>
+			</small>
+			<small>
+				日期：
+				<cite title="<%= post.time.minute %>">
+					<%= post.time.minute %>
+				</cite>
+			</small>
+			<small>
+				阅读：
+				<cite title="<%= post.time.minute %>">
+					<%= post.pv %>
+				</cite>
+				|评论:
+				<cite title="<%= post.time.minute %>">
+					<%= post.comments.length %>
+				</cite>
+			</small>
+			<small>
+				标签：
+				<cite title="<%= post.time.minute %>">
+					<% post.tags.forEach(function (tag,index){ %>
+						<% if(tag){%>
+							<a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
+						<% } %>
+					<% }) %>
+				</cite>
+			</small>
+		</blockquote>
+	</div>
+</div>
 <% }) %>
 <%- include paging %>
 <%- include footer %>
