@@ -54,12 +54,6 @@ span.sidespan{
 .info{
 	font-size: 14px;
 }
-input[type="submit"]{
-	width: 100px;
-	line-height: 40px;
-	font-size: 16px;
-	margin-top: 12px;
-}
 .edit{
 	margin: 3px;
 	padding: 2px 5px;
