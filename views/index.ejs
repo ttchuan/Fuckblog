@@ -1,45 +1,39 @@
 <%- include header %>
 <% posts.forEach(function (post,index){ %>
-<div class="article">
-	<div class="a_content">
-		<blockquote>
-			<p class="h3">
-				<a href="/u/<%= post.name %>/<%= post.time.day %>/<%= post.title %>"><%= post.title %></a>
-			</p>
-			<%- post.post %>
-			<small>
-				作者：
-				<cite title="<%= post.name %>">
-					<a href="/u/<%= post.name %>"><%= post.name %></a>
-				</cite>
-			</small>
-			<small>
-				日期：
-				<cite title="<%= post.time.minute %>">
-					<%= post.time.minute %>
-				</cite>
-			</small>
-			<small>
-				阅读：
-				<cite title="<%= post.time.minute %>">
-					<%= post.pv %>
-				</cite>
-				|评论:
-				<cite title="<%= post.time.minute %>">
-					<%= post.comments.length %>
-				</cite>
-			</small>
-			<small>
-				标签：
-				<cite title="<%= post.time.minute %>">
-					<% post.tags.forEach(function (tag,index){ %>
-						<% if(tag){%>
-							<a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
-						<% } %>
-					<% }) %>
-				</cite>
-			</small>
-		</blockquote>
+<div class="article panel panel-default">
+	<div class="panel-heading">
+		<h3>
+			<a href="/u/<%= post.name %>/<%= post.time.day %>/<%= post.title %>"><%= post.title %></a>
+		</h3>
+	</div>
+	<div class="a_content panel-body">
+		<%- post.post %>
+		<small>
+			作者：
+			<cite title="<%= post.name %>">
+				<a href="/u/<%= post.name %>"><%= post.name %></a>
+			</cite>
+			日期：
+			<cite title="<%= post.time.minute %>">
+				<%= post.time.minute %>
+			</cite>
+			阅读：
+			<cite title="<%= post.time.minute %>">
+				<%= post.pv %>
+			</cite>
+			|评论:
+			<cite title="<%= post.time.minute %>">
+				<%= post.comments.length %>
+			</cite>
+			标签：
+			<cite title="<%= post.time.minute %>">
+				<% post.tags.forEach(function (tag,index){ %>
+					<% if(tag){%>
+						<a class="tag" href="/tags/<%= tag %>"><%= tag %></a>
+					<% } %>
+				<% }) %>
+			</cite>
+		</small>
 	</div>
 </div>
 <% }) %>
